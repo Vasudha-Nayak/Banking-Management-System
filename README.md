@@ -21,6 +21,18 @@ Database :     MySQL (Workbench)
 - Import the database.sql file into phpMyAdmin.
 - Visit http://localhost/dbms_project in your browser.
 
+  📸 Screenshots
+  
+🖼️ Homepage
+![Homepage](screenshots/home_page.png)
+🖼️ User Dashboard
+![User Dashboard](screenshots/user_dashboard.png)
+🖼️ Transations Page
+![Transactions](screenshots/transaction.png)
+🖼️ Admin Page
+![Admin Loan Review](screenshots/admin_page.png)
+
+
 👩‍💻 Authors
 Vasudha Nayak
 Aditi H Nayak
