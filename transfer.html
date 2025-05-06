@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Transfer - NovaBank</title>
+  <link href="bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container py-5">
+  <h2 class="mb-4">🔄 Transfer Funds</h2>
+  <form id="transferForm">
+    <div class="mb-3">
+      <label for="customer_id" class="form-label">Customer ID</label>
+      <input type="number" class="form-control" id="customer_id" name="customer_id" required>
+    </div>
+    <div class="mb-3">
+      <label for="from_account" class="form-label">From Account ID</label>
+      <input type="number" class="form-control" id="from_account" name="from_account" required>
+    </div>
+    <div class="mb-3">
+      <label for="to_account" class="form-label">To Account ID</label>
+      <input type="number" class="form-control" id="to_account" name="to_account" required>
+    </div>
+    <div class="mb-3">
+      <label for="amount" class="form-label">Amount</label>
+      <input type="number" class="form-control" id="amount" name="amount" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Transfer</button>
+    <p class="mt-3" id="resultMsg"></p>
+  </form>
+
+  <script>
+    document.getElementById('transferForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      fetch('transfer.php', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('resultMsg').innerText = data;
+      })
+      .catch(error => {
+        document.getElementById('resultMsg').innerText = 'Error: ' + error;
+      });
+    });
+  </script>
+</body>
+</html>

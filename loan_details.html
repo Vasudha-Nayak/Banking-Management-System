@@ -1,0 +1,105 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Loan Details</title>
+    <link href="bootstrap.min.css" rel="stylesheet">
+    <style>
+      body {
+        background: #000000;
+        color: #f8f9fa;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+      .form-container {
+        background: #1e1e1e;
+        padding: 2rem 3rem;
+        border-radius: 12px;
+        box-shadow: 0 0 30px rgba(255, 255, 255, 0.05);
+      }
+      .form-header {
+        color: #ffffff;
+      }
+      .form-label {
+        color: #cccccc;
+      }
+      .form-control, .form-select {
+        background-color: #2c2c2c;
+        color: #ffffff;
+        border: 1px solid #444;
+      }
+      .form-control::placeholder {
+        color: #bbbbbb;
+      }
+      .btn-success {
+        padding: 0.6rem 2rem;
+        font-size: 1.1rem;
+        border-radius: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container mt-5">
+      <div class="form-container w-75 mx-auto">
+        <h2 class="text-center form-header mb-4">📄 Complete Your Loan Application</h2>
+        <form id="loanForm">
+          <input type="hidden" id="accountId" name="account_id">
+
+          <div class="mb-3">
+            <label for="loan_type" class="form-label">Loan Type</label>
+            <select class="form-select" id="loan_type" name="loan_type" required>
+              <option value="">Select</option>
+              <option value="Personal">Personal</option>
+              <option value="Home">Home</option>
+              <option value="Car">Car</option>
+              <option value="Education">Education</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label for="requested_amount" class="form-label">Requested Amount</label>
+            <input type="number" class="form-control" id="requested_amount" name="requested_amount" placeholder="Enter amount in ₹" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="credit_score" class="form-label">Credit Score</label>
+            <input type="number" class="form-control" id="credit_score" name="credit_score" placeholder="e.g. 750" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="income" class="form-label">Annual Income</label>
+            <input type="number" class="form-control" id="income" name="income" placeholder="Enter annual income in ₹" required>
+          </div>
+
+          <div class="text-center">
+            <button type="submit" class="btn btn-success">Submit Application</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      window.onload = () => {
+        const params = new URLSearchParams(window.location.search);
+        document.getElementById('accountId').value = params.get('account_id');
+      };
+    
+      document.getElementById('loanForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+    
+        const formData = new FormData(event.target);
+        fetch('submit_loan.php', {
+          method: 'POST',
+          body: formData
+        }).then(res => {
+          if (res.redirected) {
+            // Let the browser follow the redirect
+            window.location.href = res.url;
+          } else {
+            return res.text().then(text => alert(text));
+          }
+        }).catch(err => alert("An error occurred: " + err));
+      });
+    </script>
+    
+  </body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create New Account - NovaBank</title>
+  <link rel="stylesheet" href="login.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <h1>NovaBank</h1>
+      <h3>Create New Account</h3>
+      <p>Your trusted digital banking partner</p>
+    </div>
+
+    <!-- Form -->
+    <form id="account-form" method="POST" action="create_account.php">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" name="name" placeholder="John Doe" required>
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" placeholder="example@domain.com" required>
+
+      <label for="phone">Phone Number</label>
+      <input type="text" id="phone" name="phone" placeholder="1234567890" required>
+
+      <label for="address">Address</label>
+      <input type="text" id="address" name="address" placeholder="123 Main St" required>
+
+      <label for="account_type">Account Type</label>
+      <select id="account_type" name="account_type" required>
+        <option value="Savings">Savings</option>
+        <option value="Current">Current</option>
+      </select><br><br>
+
+      <label for="balance">Initial Deposit </label>
+      <input type="number" id="balance" name="initial_deposit" placeholder="0.00" required step="0.01" min="0">
+
+      <label for="username">Username:</label>
+        <input type="text" name="username" required><br><br>
+
+        <label for="password">Password:</label>
+        <input type="password" name="password" required><br><br>
+
+
+      <button type="submit" class="sign-in-btn">Create Account</button>
+    </form>
+  </div>
+</body>
+</html>

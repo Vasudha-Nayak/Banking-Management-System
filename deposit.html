@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Deposit - NovaBank</title>
+  <link href="bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container py-5">
+  <h2 class="mb-4">💸 Deposit Funds</h2>
+  <form id="depositForm">
+    <div class="mb-3">
+      <label for="customer_id" class="form-label">Customer ID</label>
+      <input type="number" name="customer_id" class="form-control" id="customer_id" required>
+    </div>
+    <div class="mb-3">
+      <label for="account_id" class="form-label">Account ID</label>
+      <input type="number" name="account_id" class="form-control" id="account_id" required>
+    </div>
+    <div class="mb-3">
+      <label for="amount" class="form-label">Amount</label>
+      <input type="number" name="amount" class="form-control" id="amount" required>
+    </div>
+    <div class="mb-3">
+      <label for="mode" class="form-label">Mode of Deposit</label>
+      <select class="form-select" name="mode" id="mode" required>
+        <option value="Cash">Cash</option>
+        <option value="Online">Online</option>
+        <option value="Cheque">Cheque</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-success">Deposit</button>
+    <p class="mt-3" id="resultMsg"></p>
+  </form>
+
+  <script>
+    document.getElementById('depositForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      fetch('deposit.php', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('resultMsg').innerText = data;
+      })
+      .catch(error => {
+        document.getElementById('resultMsg').innerText = 'Error: ' + error;
+      });
+    });
+  </script>
+</body>
+</html>
